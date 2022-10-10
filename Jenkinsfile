@@ -25,7 +25,7 @@ pipeline {
     }
     stage('Unit test integration'){
       when{
-        anyof {
+        anyOf {
           branch 'develop';
           branch 'main'
         }
