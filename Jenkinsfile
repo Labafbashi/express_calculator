@@ -5,16 +5,14 @@ pipeline {
   agent any
 	stages {
 		stage('Prebuild') {
-      when{
-        branch 'feature/*'
-      }
+// For Develop stage we couldn't use this section. because we need 'npm install' before next steps.
+//      when{
+//        branch 'feature/*'
+//      }
       steps {
         echo "********************* FEATURE *********************"
-				//sh 'npm install'
+				sh 'npm install'
 			}
-      steps{
-        sh 'npm install'
-      }
 		}
     stage('Unit test') {
       steps {
