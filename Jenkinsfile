@@ -1,10 +1,15 @@
 pipeline {
-	agent {
-    docker { image 'node:14-alpine' }
-  }
+#	agent {
+#    docker { image 'node:14-alpine' }
+#  }
+  agent any
 	stages {
 		stage('Prebuild') {
-			steps {
+      when{
+        branch 'feature/*'
+      }
+      steps {
+        echo "********************* FEATURE *********************"
 				sh 'npm install'
 			}
 		}
@@ -19,7 +24,14 @@ pipeline {
       }
     }
     stage('Unit test integration'){
+      when{
+        anyof {
+          branch 'develop';
+          branch 'main'
+        }
+      }
       steps {
+        echo "********************* DEVELOP / MAIN *********************"
         sh 'npm run test-integration'
       }
     }
