@@ -41,7 +41,7 @@ pipeline {
         branch 'main'
       }
       steps {
-        docker.withRegistery('https://registery.hub.docker.com', 'dockerhub') {
+        docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
           def img = docker.build("paramont/express-calculator")
           img.push()
         }
